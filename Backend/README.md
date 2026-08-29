@@ -32,15 +32,20 @@ User form → metadata filter จาก DB → retrieve เอกสารที
 ```
 
 ![1.home](/assets/0.png)<br>
+*รูปที่ 1: หน้าแรกของระบบ (Home)*<br>
 
 ![2.input](/assets/1.png)<br>
+*รูปที่ 2: ฟอร์มกรอกข้อมูลการใช้งาน (Input)*<br>
 
 ![3.select input](/assets/2.png)<br>
+*รูปที่ 3: หน้าจอเลือกตัวเลือกข้อมูล (Select Input)*<br>
 
 ![4.match rule and select RAG](/assets/3.png)<br>
+*รูปที่ 4: การ Match กับ RuleในDB และ RAGเอกสาร*<br>
 
 ![5.RAG+Rule push data to llm to result](/assets/4.png)<br>
-[](/assets/5.png)
+[](/assets/5.png)<br>
+*รูปที่ 5: Input match + Ragเอกสาร ให้ llm อธิบาย*<br>
 
 ตอน backend เริ่มทำงานครั้งแรก ระบบจะสร้างและ seed ตารางต่อไปนี้อัตโนมัติ:
 
