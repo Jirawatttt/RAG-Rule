@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 from sqlalchemy import (
     Boolean, Column, ForeignKey, Integer, String, Text,
-    DateTime, Float, func, select, text
+    DateTime, func, select, text
 )
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import (

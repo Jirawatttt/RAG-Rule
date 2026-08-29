@@ -4,10 +4,6 @@
 
 const API_BASE = "http://localhost:8000";
 
-function goTo(pageId) {
-  window.location.href = pageId + ".html";
-}
-
 /* ── Submit form ──────────────────────────────────────────── */
 async function submitForm() {
   const profile = {};
@@ -59,34 +55,6 @@ async function submitForm() {
     alert("ไม่สามารถเชื่อมต่อกับ server ได้");
     console.error(e);
   }
-}
-
-function clearForm() {
-  ["inp-age","inp-nationality","inp-social-security",
-   "inp-children","inp-employment","inp-disability"]
-    .forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.value = ""; el.classList.remove("filled","is-invalid"); }
-    });
-  sessionStorage.removeItem("userProfile");
-}
-
-/* ── Highlight chips ──────────────────────────────────────── */
-const BENEFIT_HIGHLIGHTS = {
-  "เบี้ยยังชีพผู้สูงอายุ":                   [{icon:"💰",label:"600–1,000 บาท/เดือน"},{icon:"🏛️",label:"ติดต่อ อบต./เทศบาล"},{icon:"📋",label:"ใช้บัตรประชาชน"}],
-  "เบี้ยความพิการ":                            [{icon:"💰",label:"800 บาท/เดือน"},{icon:"🚌",label:"ลดค่าโดยสาร"},{icon:"📋",label:"ใช้บัตรผู้พิการ"}],
-  "สวัสดิการแห่งรัฐ (บัตรคนจน)":              [{icon:"🛒",label:"ค่าสินค้าอุปโภคบริโภค"},{icon:"💡",label:"ค่าน้ำ-ค่าไฟ"},{icon:"🚌",label:"ค่าโดยสาร"}],
-  "ประกันสังคม มาตรา 33":                      [{icon:"🏥",label:"รักษาพยาบาลฟรี"},{icon:"👶",label:"สิทธิคลอดบุตร"},{icon:"🛡️",label:"คุ้มครอง 7 กรณี"}],
-  "ประกันสังคม มาตรา 39":                      [{icon:"🏥",label:"รักษาพยาบาลฟรี"},{icon:"👴",label:"เงินชราภาพ"},{icon:"🛡️",label:"คุ้มครอง 6 กรณี"}],
-  "ประกันสังคม มาตรา 40":                      [{icon:"💰",label:"ส่งสมทบ 70 บาท/เดือน"},{icon:"🏥",label:"เจ็บป่วย-ทุพพลภาพ"},{icon:"👴",label:"เงินชราภาพ"}],
-  "เงินอุดหนุนเด็กแรกเกิด":                   [{icon:"💰",label:"600 บาท/เดือน"},{icon:"📅",label:"ถึงอายุ 6 ปี"},{icon:"📋",label:"ใช้สูติบัตรบุตร"}],
-  "สิทธิหลักประกันสุขภาพถ้วนหน้า (บัตรทอง)": [{icon:"🏥",label:"รักษาฟรีโรงพยาบาลรัฐ"},{icon:"💊",label:"รับยาฟรี"},{icon:"📋",label:"ใช้บัตรประชาชน"}],
-};
-
-function getHighlightBar(name) {
-  const chips = BENEFIT_HIGHLIGHTS[name] || [];
-  if (!chips.length) return "";
-  return `<div class="highlight-bar">${chips.map(c => `<div class="highlight-chip"><span class="chip-icon">${c.icon}</span>${c.label}</div>`).join("")}</div>`;
 }
 
 /* ── Render results ───────────────────────────────────────── */

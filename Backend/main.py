@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from rules import (
+from models import (
     UserProfile, Nationality, SocialSecurityType,
     EmploymentStatus, ChildrenStatus,
 )
@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(_app: FastAPI):
     logger.info("🚀 Starting up — connecting to database...")
     await database.connect()
     yield
@@ -73,8 +73,7 @@ class ProfileRequest(BaseModel):
     """ทุก field เป็น Optional — user กรอกแค่บางช่องได้
 
     ใช้ Literal แทน str ธรรมดา เพื่อให้ตรงกับ option จริงใน input.html
-    ทุกตัวอักษร — ค่าที่ไม่ตรง (เช่น พิมพ์ผิด, ค่าที่ frontend ไม่มีทางส่งมา
-    เช่น employment="farmer") จะถูก FastAPI reject เป็น 422 ทันที
+    ทุกตัวอักษร — ค่าที่ไม่ตรงหรือพิมพ์ผิดจะถูก FastAPI reject เป็น 422 ทันที
     แทนที่จะเงียบหายกลายเป็น None ปนกับ "ยังไม่ได้กรอก" ตอนเข้า rule engine
     """
     age:             Optional[int] = Field(None, ge=0, le=120)

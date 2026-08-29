@@ -6,7 +6,7 @@ import logging
 from typing import AsyncGenerator
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
-from rules import UserProfile, Benefit
+from models import UserProfile, Benefit
 
 load_dotenv()
 logger = logging.getLogger(__name__)
@@ -21,7 +21,6 @@ def _build_prompt(profile: UserProfile, benefits: list[Benefit]) -> str:
     employment_th = {
         "employed":   "ลูกจ้าง",
         "self":       "อาชีพอิสระ",
-        "farmer":     "เกษตรกร",
         "unemployed": "ว่างงาน",
     }.get(profile.employment.value if profile.employment else "", "ไม่ระบุ")
 

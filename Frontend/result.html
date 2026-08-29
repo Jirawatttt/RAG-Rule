@@ -14,24 +14,6 @@
       max-width: 900px; width: 100%; margin: 0 auto;
     }
 
-    /* ── Banner ── */
-    .result-banner {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-      border-radius: 12px; padding: 24px 28px; margin-bottom: 20px;
-      text-align: center; color: #fff;
-      box-shadow: 0 4px 16px rgba(27,58,107,0.2);
-      position: relative; overflow: hidden;
-    }
-    .result-banner::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
-    }
-    .result-banner .banner-label {
-      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; opacity: 0.8; margin-bottom: 4px;
-    }
-    .result-banner h2 { font-size: 1.3rem; font-weight: 700; margin: 0; }
-
     /* ── Action bar ── */
     .action-bar {
       display: flex; gap: 10px;
@@ -48,181 +30,7 @@
     .icon-btn svg { width: 16px; height: 16px; }
     .icon-btn.copied { background: #E8F8F0; border-color: #1D9E75; color: #1D9E75; }
 
-    /* ── Accordion card ── */
-    .benefit-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 12px; margin-bottom: 12px; overflow: hidden;
-      box-shadow: 0 2px 8px rgba(27,58,107,0.07);
-    }
-    .benefit-card-header {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-      padding: 16px 22px;
-      display: flex; align-items: center; gap: 12px;
-      cursor: pointer; user-select: none;
-    }
-    .benefit-card-header:hover { filter: brightness(1.08); }
-    .benefit-index {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,255,255,0.15); border: 1.5px solid rgba(200,168,75,0.6);
-      color: var(--gold-light); font-size: 0.9rem; font-weight: 700;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .benefit-title { font-size: 1rem; font-weight: 700; color: #fff; margin: 0; flex: 1; }
-    .benefit-toggle {
-      width: 26px; height: 26px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.15); border-radius: 50%;
-      color: #fff; font-size: 1.2rem; line-height: 1;
-      transition: transform 0.3s ease;
-    }
-    .benefit-card.open .benefit-toggle { transform: rotate(45deg); }
-
-    /* body accordion */
-    .benefit-card-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 24px;
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 22px;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-    }
-    .benefit-card.open .benefit-card-body {
-      max-height: 1200px;
-      padding: 20px 22px;
-    }
-
-    .benefit-section-title {
-      font-size: 0.73rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--navy);
-      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
-    }
-    .benefit-section-title::before {
-      content: ''; width: 3px; height: 12px;
-      background: var(--gold); border-radius: 2px; display: inline-block;
-    }
-    .benefit-detail { font-size: 0.9rem; color: var(--text-sub); line-height: 1.75; margin: 0; }
-    .benefit-detail-full { grid-column: 1 / -1; }
-
-    /* ── Checklist ✓ / ○ ── */
-    .checklist-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .checklist-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .check-icon {
-      width: 22px; height: 22px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; margin-top: 1px;
-    }
-    .check-icon svg { width: 14px; height: 14px; }
-
-    /* ✓ matched — เขียว */
-    .check-icon.matched {
-      background: #E8F8F0;
-      border: 1.5px solid #1D9E75;
-      color: #1D9E75;
-    }
-    .matched-label {
-      font-size: 0.9rem;
-      color: var(--text-main);
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    /* ○ missing — เทา */
-    .check-icon.missing {
-      background: #F4F6FA;
-      border: 1.5px solid #C0C8D8;
-      color: #8796AB;
-    }
-    .missing-label {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* note ใต้ checklist */
-    .missing-note {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-      padding: 6px 10px;
-      background: #F4F6FA;
-      border-radius: 6px;
-      border-left: 3px solid #C0C8D8;
-    }
-
-    /* ── Document list ── */
-    .doc-list {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .doc-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.88rem;
-      color: var(--text-sub);
-    }
-    .doc-row svg {
-      width: 14px; height: 14px;
-      color: var(--navy-light);
-      flex-shrink: 0;
-    }
-
-    /* ── AI detail loading ── */
-    .detail-loading {
-      display: inline-block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-    .detail-loading::after {
-      content: '...';
-      animation: dots 1.2s infinite;
-    }
-    @keyframes dots {
-      0%,20%  { content: '.'; }
-      40%,60% { content: '..'; }
-      80%,100%{ content: '...'; }
-    }
-
-    /* ── Highlight chips ── */
-    .highlight-bar {
-      display: flex; gap: 8px; flex-wrap: wrap;
-      padding: 10px 22px 12px;
-      background: rgba(0,0,0,0.15);
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .highlight-chip {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 20px; padding: 4px 12px;
-      font-size: 0.8rem; font-weight: 600; color: #fff;
-      font-family: 'Sarabun', sans-serif;
-    }
-    .chip-icon { font-size: 0.9rem; line-height: 1; }
-
-    /* ── hint / disclaimer / misc ── */
-    .expand-hint {
-      font-size: 0.78rem; color: var(--text-muted);
-      text-align: right; margin-bottom: 8px;
-    }
-    .benefit-link {
-      display: inline-block; color: var(--navy-light);
-      text-decoration: underline; font-size: 0.88rem;
-      font-weight: 600; font-family: 'Sarabun', sans-serif;
-      transition: color 0.2s;
-    }
-    .benefit-link:hover { color: var(--navy); }
+    /* ── Result states ── */
     .disclaimer {
       font-size: 0.82rem; color: var(--text-muted); margin-top: 24px;
       padding: 12px 16px; background: #fff; border: 1px solid var(--border);
@@ -253,12 +61,10 @@
 
     @media print {
       .app-header, .footer-actions, .action-bar { display: none !important; }
-      .benefit-card-body { max-height: none !important; padding: 20px 22px !important; }
       .content-area { padding: 0; max-width: 100%; }
       body { background: #fff; }
     }
     @media (max-width: 576px) {
-      .benefit-card-body { grid-template-columns: 1fr; }
       .rag-grid { grid-template-columns: 1fr; gap: 15px; }.rag-card, .rag-hero { padding: 20px; }.rag-footer { flex-direction: column; }
       .content-area { padding: 24px 16px; }
       .action-bar { justify-content: center; flex-wrap: wrap; }
@@ -320,10 +126,6 @@
         loadAIExplanation();
       }
     });
-
-    function toggleCard(card) {
-      card.classList.toggle("open");
-    }
 
     function copyResults() {
       if (currentBenefits.length === 0) return;

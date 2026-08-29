@@ -9,7 +9,7 @@ from typing import Any
 
 import database
 import llm
-from rules import Benefit, UserProfile
+from models import Benefit, UserProfile
 
 
 def _value(profile: UserProfile, field: str) -> Any:

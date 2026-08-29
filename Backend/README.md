@@ -12,8 +12,8 @@ rights-project/
 │
 └── backend/        ← FastAPI + Python
     ├── main.py     ← routes
-    ├── rules.py    ← rule engine
-    ├── llm.py      ← Gemini AI
+    ├── models.py   ← model ข้อมูลผู้ใช้และผลสิทธิ
+    ├── llm.py      ← OpenAI client
     ├── database.py ← PostgreSQL
     ├── requirements.txt
     └── .env.example
@@ -23,13 +23,24 @@ rights-project/
 
 ## โครงสร้าง RAG ใหม่
 
-ระบบยังรับข้อมูลจากฟอร์มเดิม แต่เปลี่ยนแหล่งเงื่อนไขจาก `rules.py`
+ระบบยังรับข้อมูลจากฟอร์มเดิม แต่เปลี่ยนแหล่งเงื่อนไขไปอยู่ในฐานข้อมูล
 ไปเป็น PostgreSQL เพื่อให้แก้ไขได้โดยไม่ต้องแก้โค้ด
 
 ```
 User form → metadata filter จาก DB → retrieve เอกสารที่เกี่ยวข้อง
           → OpenAI อธิบายผลจากหลักฐาน RAG → result.html
 ```
+
+![1.home](/assets/0.png)<br>
+
+![2.input](/assets/1.png)<br>
+
+![3.select input](/assets/2.png)<br>
+
+![4.match rule and select RAG](/assets/3.png)<br>
+
+![5.RAG+Rule push data to llm to result](/assets/4.png)<br>
+[](/assets/5.png)
 
 ตอน backend เริ่มทำงานครั้งแรก ระบบจะสร้างและ seed ตารางต่อไปนี้อัตโนมัติ:
 
@@ -70,7 +81,7 @@ embedding จะถูกเก็บไว้ใน `benefit_documents.embeddin
 ### สิ่งที่ต้องมีก่อน
 - Python 3.11+
 - PostgreSQL (ติดตั้งแล้วรันอยู่)
-- Gemini API key (ฟรี) → https://aistudio.google.com/app/apikey
+- OpenAI API key → https://platform.openai.com/api-keys
 - VS Code + extension "Live Server"
 
 ---
@@ -108,7 +119,7 @@ cp .env.example .env
 แก้ไข `.env` ใส่ค่าจริง:
 ```
 DATABASE_URL=postgresql+asyncpg://postgres:รหัสผ่านของคุณ@localhost:5432/rights_db
-GEMINI_API_KEY=ใส่ key ที่ได้จาก Google AI Studio
+OPENAI_API_KEY=ใส่ OpenAI API key
 ALLOWED_ORIGINS=http://localhost:5500,http://127.0.0.1:5500
 ```
 
@@ -163,4 +174,4 @@ http://localhost:8000/stats
 → ตรวจสอบว่า uvicorn รันอยู่ที่ port 8000
 
 **AI ไม่แสดงคำอธิบาย**
-→ ตรวจสอบ GEMINI_API_KEY ใน .env
+→ ตรวจสอบ OPENAI_API_KEY ใน .env
