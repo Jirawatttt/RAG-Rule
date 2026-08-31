@@ -16,15 +16,15 @@ rights-project/
     ├── llm.py      ← OpenAI client
     ├── database.py ← PostgreSQL
     ├── requirements.txt
+    ├── rag.py
+    ├── rag_catalog.py
+    ├── run.py
     └── .env.example
 ```
 
 ---
 
 ## โครงสร้าง RAG ใหม่
-
-ระบบยังรับข้อมูลจากฟอร์มเดิม แต่เปลี่ยนแหล่งเงื่อนไขไปอยู่ในฐานข้อมูล
-ไปเป็น PostgreSQL เพื่อให้แก้ไขได้โดยไม่ต้องแก้โค้ด
 
 ```
 User form → metadata filter จาก DB → retrieve เอกสารที่เกี่ยวข้อง
@@ -41,7 +41,7 @@ User form → metadata filter จาก DB → retrieve เอกสารที
 *รูปที่ 3: หน้าจอเลือกตัวเลือกข้อมูล (Select Input)*<br>
 
 ![4.match rule and select RAG](/assets/3.png)<br>
-*รูปที่ 4: การ Match กับ RuleในDB และ RAGเอกสาร*<br>
+*รูปที่ 4: การ Match กับ RuleในDB และ ทำการ RAG เอกสารเกี่ยวกับสิทธิที่ Match*<br>
 
 ![5.RAG+Rule push data to llm to result](/assets/4.png)<br>
 ![](/assets/5.png)<br>
@@ -84,7 +84,7 @@ embedding จะถูกเก็บไว้ใน `benefit_documents.embeddin
 ## วิธีรันบนเครื่อง (Local)
 
 ### สิ่งที่ต้องมีก่อน
-- Python 3.11+
+- Python 3.10+
 - PostgreSQL (ติดตั้งแล้วรันอยู่)
 - OpenAI API key → https://platform.openai.com/api-keys
 - VS Code + extension "Live Server"
@@ -94,8 +94,8 @@ embedding จะถูกเก็บไว้ใน `benefit_documents.embeddin
 ### ขั้นตอนที่ 1 — ตั้งค่า PostgreSQL
 
 ```sql
--- เปิด psql แล้วรัน
-CREATE DATABASE rights_db;
+-- เปิด pgadmin แล้วรัน
+CREATE DATABASE name_da; --ใส่ชื่อ bd ใน name_bd
 ```
 
 ---
@@ -123,7 +123,7 @@ cp .env.example .env
 
 แก้ไข `.env` ใส่ค่าจริง:
 ```
-DATABASE_URL=postgresql+asyncpg://postgres:รหัสผ่านของคุณ@localhost:5432/rights_db
+DATABASE_URL=postgresql+asyncpg://postgres:password@localhost:port/name db
 OPENAI_API_KEY=ใส่ OpenAI API key
 ALLOWED_ORIGINS=http://localhost:5500,http://127.0.0.1:5500
 ```
@@ -134,7 +134,7 @@ ALLOWED_ORIGINS=http://localhost:5500,http://127.0.0.1:5500
 
 ```bash
 # อยู่ใน folder backend และ venv เปิดอยู่
-uvicorn main:app --reload
+python run.py หรือ uvicorn main:app --reload โดยตรงผ่าน Terminal ก็ได้
 ```
 
 เห็นข้อความนี้ = สำเร็จ ✅
@@ -167,16 +167,4 @@ INFO: Database connected — tables ready
 ```
 http://localhost:8000/stats
 ```
-
 ---
-
-## หากเจอปัญหา
-
-**backend ขึ้น error "asyncpg"**
-→ ตรวจสอบว่า PostgreSQL รันอยู่ และ DATABASE_URL ใน .env ถูกต้อง
-
-**หน้าเว็บขึ้น "ไม่สามารถเชื่อมต่อกับ server"**
-→ ตรวจสอบว่า uvicorn รันอยู่ที่ port 8000
-
-**AI ไม่แสดงคำอธิบาย**
-→ ตรวจสอบ OPENAI_API_KEY ใน .env

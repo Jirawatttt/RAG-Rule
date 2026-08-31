@@ -1,9 +1,3 @@
-"""Initial data for the rights catalogue.
-
-This file only bootstraps an empty database.  After the first start, edit the
-benefit, benefit_condition and benefit_document tables instead of editing code.
-"""
-
 BENEFIT_CATALOG = [
     {
         "slug": "elderly_allowance",
